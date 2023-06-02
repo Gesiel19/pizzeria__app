@@ -17,6 +17,13 @@ const Login = () => {
 
     <form>
 
+      <div>
+        <input 
+        type='email'
+        placeholder='Usuario'
+        
+        />
+      </div>
 
 
 

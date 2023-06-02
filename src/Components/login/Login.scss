@@ -7,10 +7,19 @@
 
 body{
     background-image: url("./../../assest/Diseño\ sin\ título\ \(8\).png");
-    
+    background-repeat: no-repeat;
    
     
 }
+
+input{
+    background-color: transparent;
+    border: none;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+
 
 .description{
     color: white;
