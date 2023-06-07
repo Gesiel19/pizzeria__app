@@ -1,6 +1,6 @@
 import React from 'react'
-import { Formik, useFormik } from 'formik'
-import * as Yup from "yup"
+// import { Formik, useFormik } from 'formik'
+// import * as Yup from "yup"
 import logo from "../../assest/logo.png"
 import "./Login.scss"
 import bg from "../../assest/bg.png"

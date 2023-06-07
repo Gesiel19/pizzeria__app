@@ -4,7 +4,7 @@ import Layout from "../layout/Layout";
 import ContextProvider from "../context/Context";
 import Home from "../home/Home";
 import Login from "../login/Login"
-
+import SearchsPizzas from "../searchs/SearchsPizzas";
 
 
 const AppRouters = () => {
@@ -20,7 +20,7 @@ const AppRouters = () => {
             <Route path={"/"} element={<Layout />}>
 
               <Route index element={<Home />} />
-             
+              <Route path="searchPizzas" element={<SearchsPizzas />} />
 
             </Route>
           </Routes>
