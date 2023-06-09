@@ -19,7 +19,7 @@ const AppRouters = () => {
             
             <Route path={"/"} element={<Layout />}>
 
-              <Route index element={<Home />} />
+              <Route path={"/Home"} index element={<Home />} />
              
 
             </Route>
