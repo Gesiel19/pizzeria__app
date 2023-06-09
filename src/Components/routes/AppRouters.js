@@ -18,9 +18,9 @@ const AppRouters = () => {
           <Route index element={<Login />} />
             
             <Route path={"/"} element={<Layout />}>
-
-              <Route index element={<Home />} />
               <Route path="searchPizzas" element={<SearchsPizzas />} />
+              <Route path={"/Home"} index element={<Home />} />
+             
 
             </Route>
           </Routes>
