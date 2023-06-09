@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SearchPizzas.scss";
 import { RiSearchLine } from "react-icons/ri";
 import axios from "axios";
+import backgroundImage from "../../assest/image2Search.png";
 
 const SearchsPizzas = () => {
   const [searchPizzas, setSearchPizzas] = useState("");
@@ -41,7 +42,14 @@ const SearchsPizzas = () => {
         {dataPizzas.length ? (
           dataPizzas.map((item) => <img src={item.image} />)
         ) : (
-          <span>Sin coincidencias</span>
+          <>
+            <div className="main__image_fondo">
+              <img src={backgroundImage} />
+            </div>
+            <div className="main__text"> 
+              <span>Busca la pizza que más te guste</span>
+            </div>
+          </>
         )}
       </div>
     </main>
