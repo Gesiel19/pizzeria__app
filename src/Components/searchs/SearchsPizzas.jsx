@@ -3,10 +3,7 @@ import "./SearchPizzas.scss";
 import { RiSearchLine } from "react-icons/ri";
 import axios from "axios";
 import backgroundImage from "../../assest/image2Search.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
-import "swiper/swiper-bundle.css";
-import "../home/Card.scss";
+import PizzaCard from "../home/PizzaCard"
 
 const SearchsPizzas = () => {
   const [searchPizzas, setSearchPizzas] = useState("");
@@ -40,42 +37,17 @@ const SearchsPizzas = () => {
         </div>
       </form>
       <div className="main__cantidad_Resultados">
-        <h3>2 resultados</h3>
+      <h3>{dataPizzas.length} resultado(s)</h3>
       </div>
       <div className="main__cards_Resultados">
-        {/* {dataPizzas.length ? (
-          dataPizzas.map((item) => <img src={item.image} />)
+        {dataPizzas.length ? (
+          dataPizzas.map((pizza) => <PizzaCard key={pizza.id} recipe={pizza}/>)
         ) : (
           <>
             <div className="main__image_fondo">
               <img src={backgroundImage} />
             </div>
             <div className="main__text"> 
-              <span>Busca la pizza que más te guste</span>
-            </div>
-          </>
-        )} */}
-        {dataPizzas.length ? (
-          <Swiper>
-            {dataPizzas.map((item) => (
-              <SwiperSlide className="carrousel" key={item.id}>
-                {item.image.map((imageItem, index) => (
-                  <img
-                    src={imageItem.photo}
-                    alt={`pizza-${index}`}
-                    key={index}
-                  />
-                ))}
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          // Renderización alternativa si no hay resultados
-          <>
-            <div className="main__image_fondo">
-              <img src={backgroundImage} alt="background" />
-            </div>
-            <div className="main__text">
               <span>Busca la pizza que más te guste</span>
             </div>
           </>
