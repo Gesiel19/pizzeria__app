@@ -1,7 +1,43 @@
 import React from 'react'
 import "./shopDetails.scss";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const ShopDetails = () => {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit =  () => {
+    navigate("/confirmationShop");
+  }
+  const ValidateTarjeta = (value) => {
+    if (value.length < 8) {
+      return "El numero debería contener al menos 8 caracteres";
+    } else if (value.length > 16) {
+      return "El numero debe contener menos de 16 de caracteres";
+    } else {
+      return true;
+    }
+  };
+  const ValidateFecha = (value) => {
+    if (value.length < 4) {
+      return "El numero debe contener exactamente 4 caracteres";
+    } else {
+      return true;
+    }
+  };
+  const ValidateCvv = (value) => {
+    if (value.length < 3) {
+      return "El numero debe contener exactamente 3 caracteres";
+    } else {
+      return true;
+    }
+  };
+  
   return (
     <>
       <div className="contenedor__todo">
@@ -11,7 +47,7 @@ const ShopDetails = () => {
               </button>
               <h2>Carrito de compras</h2>
           </div>
-        <form  className="containerformulario">
+        <form onSubmit={handleSubmit(onSubmit)} className="containerformulario">
           
           
           <div className="card__compra">
@@ -24,11 +60,11 @@ const ShopDetails = () => {
               <div className="price__shop">$</div>
             </div>
           </div>
-          <h2>Informacion de pago</h2>
+          <h2 className='title__shop'>Informacion de pago</h2>
           <label>
             Nombre completo
             <input
-              className="form-control my-2"
+              className="form-control"
               type="text"
               placeholder="Ingresa tu nombre"
              
@@ -39,12 +75,17 @@ const ShopDetails = () => {
           <label>
             Numero de tarjeta
             <input
-              className="form-control my-2"
+              className="form-control"
               type="number"
               placeholder="1234 1234 1234 1234"
-             
+              {...register("tarjeta", {
+                required: true,
+                validate: ValidateTarjeta,
+              })}
             />
-           
+           {errors.tarjeta && (
+              <span>El numero ingresado no pertenece a ninguna tarjeta</span>
+            )}
           </label>
 
           <div className="contenedor__fecha">
@@ -52,31 +93,37 @@ const ShopDetails = () => {
               <label>
                 Fecha de vencimiento
                 <input
-                  className="form-control my-2"
+                  className="form-control-fecha"
                   type="number"
                   placeholder="MMYY"
-                 
+                  {...register("fecha", {
+                    required: true,
+                    validate: ValidateFecha,
+                  })}
                 />
-                
+                  {errors.fecha && <span>la fecha ingresada es invalida</span>}
               </label>
             </div>
             <div>
               <label>
                 CVV
                 <input
-                  className="form-control my-2"
+                  className="form-control-cvv"
                   type="password"
                   placeholder="CVV"
-                 
+                  {...register("cvv", {
+                    required: true,
+                    validate: ValidateCvv,
+                  })}
                 />
-                
+                {errors.cvv && <span>El codigo ingresado es incorrecto</span>}
               </label>
             </div>
           </div>
           <label>
             Direccion
             <input
-              className="form-control my-2"
+              className="form-control"
               type="street-address"
               placeholder="Direccion"
            

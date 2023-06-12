@@ -25,32 +25,32 @@ const SearchsPizzas = () => {
   };
 
   return (
-    <main className="main">
-      <form className="main__search_Bar">
+    <main className="contenedor">
+      <form className="contenedor__search_Bar">
         <input
        
           placeholder="pizza de peperoni, mexicana, ha..."
-          className="main__inputSearch"
+          className="contenedor__inputSearch"
           type="text"
           value={searchPizzas}
           onChange={handleSearchPizzas}
         />
-        <div className="main__icon_search">
+        <div className="contenedor__icon_search">
           <RiSearchLine />
         </div>
       </form>
-      <div className="main__cantidad_Resultados">
+      <div className="contenedor__cantidad_Resultados">
       <h3>{dataPizzas.length} resultado(s)</h3>
       </div>
-      <div className="main__cards_Resultados">
+      <div className="contenedor__cards_Resultados">
         {dataPizzas.length ? (
           dataPizzas.map((pizza) => <PizzaCard key={pizza.id} recipe={pizza}/>)
         ) : (
           <>
-            <div className="main__image_fondo">
+            <div className="contenedor__image_fondo">
               <img src={backgroundImage} />
             </div>
-            <div className="main__text"> 
+            <div className="contenedor__text"> 
               <span>Busca la pizza que más te guste</span>
             </div>
           </>

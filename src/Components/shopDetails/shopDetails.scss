@@ -11,8 +11,9 @@
  
 }
 .imagen__shop{
-height: 140px;
-padding: 10px;
+    height: 113px;
+    padding: 14px;
+    width: 159px;
 }
 .contenedor__shop{
     display: flex;
@@ -35,7 +36,7 @@ padding: 10px;
 }
 .price__shop{
     font-weight: 700;
-    margin-top: 100px ;
+    margin-top: 66px;
     margin-left: -70px;
     position: relative;
     z-index: 100;
@@ -45,7 +46,7 @@ padding: 10px;
     flex-direction: column;  
     margin-top: 20px;
     width: 50%;
-    gap: 5px;
+    gap: 16px;
     margin-left: -99px;
 }
 .boton__salir{
@@ -67,7 +68,7 @@ padding: 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 5px;
+    gap: 19px;
     align-items: end;
 }
 .card__compra{
@@ -80,10 +81,26 @@ padding: 10px;
 }
 .boton__form{
     border-style: none;
-    height: 30px;
+    height: 54px;
     color: white;
     background-color: #FF0A54;
-    width: 100%;
+    width: 305px;
     border-radius: 3px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
+.title__shop{
+    font-size: 20px;
+    padding-top: 16px;
+}
+.form-control{
+    width: 301px;
+    margin-left: 1px;
+}
+.form-control-fecha{
+   margin-left: 1px;
+   width: 154px;
+}
+.form-control-cvv{
+    margin-left: 1px;
+    width: 123px;
+ }
