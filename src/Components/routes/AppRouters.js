@@ -6,6 +6,7 @@ import Home from "../home/Home";
 import Login from "../login/Login"
 import SearchsPizzas from "../searchs/SearchsPizzas";
 import CardsDetails from "../cardsDetails/CardsDetails"
+import ShopDetails from "../shopDetails/ShopDetails";
 
 const AppRouters = () => {
 
@@ -17,6 +18,7 @@ const AppRouters = () => {
               
           <Route index element={<Login />} />
           <Route path="pizzasDetails" element={<CardsDetails />} />
+          <Route path="shopDetails" element={<ShopDetails />} />
             <Route path={"/"} element={<Layout />}>
               <Route path={"/Home"} index element={<Home />} />
               <Route path="searchPizzas" element={<SearchsPizzas />} />

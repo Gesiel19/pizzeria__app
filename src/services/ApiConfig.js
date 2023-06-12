@@ -1,0 +1,1 @@
+export const URL_API = 'https://backend-pizza-production.up.railway.app/pizzas'

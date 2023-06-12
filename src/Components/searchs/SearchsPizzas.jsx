@@ -5,6 +5,7 @@ import axios from "axios";
 import backgroundImage from "../../assest/image2Search.png";
 import PizzaCard from "../home/PizzaCard"
 
+
 const SearchsPizzas = () => {
   const [searchPizzas, setSearchPizzas] = useState("");
   const [dataPizzas, setDataPizzas] = useState([]);
@@ -22,10 +23,12 @@ const SearchsPizzas = () => {
     console.log(filteredPizzas);
     setDataPizzas(filteredPizzas);
   };
+
   return (
     <main className="main">
       <form className="main__search_Bar">
         <input
+       
           placeholder="pizza de peperoni, mexicana, ha..."
           className="main__inputSearch"
           type="text"

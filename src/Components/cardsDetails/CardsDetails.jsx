@@ -1,12 +1,13 @@
 import React from 'react'
 import "./CardsDetails.scss"
+import { BsChevronLeft } from "react-icons/bs";
 const CardsDetails = () => {
   return (
     <div className="body">
     <div className="main">
       <section className="main__header">
         <div className="main__goBack">
-          <span><img src="https://qualityhomescostacalida.com/assets/layout/chevron-left.png" width="35px" /></span>Todas las pizzas
+          <span><BsChevronLeft className='icon' /></span>Todas las pizzas
         </div>
       </section>
       <div className="main__contentContainer">

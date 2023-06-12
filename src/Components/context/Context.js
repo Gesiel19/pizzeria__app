@@ -1,10 +1,10 @@
 import React, {createContext, useState} from 'react'
 
-const Context = createContext ();
+export const Context = createContext ();
 const data = {};
 
 const ContextProvider = ({children}) => {
-  
+ 
     return (
         <Context.Provider value={data}>
         
