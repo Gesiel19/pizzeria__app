@@ -76,8 +76,8 @@ const ShopDetails = () => {
     }
   };
 
-    const onSubmit = async () => {
-    const values = getValues(); 
+  const onSubmit = async () => {
+    const values = getValues();
     const payload = {
       pizza: foundPizza.name,
       cantidad: count,
@@ -90,39 +90,39 @@ const ShopDetails = () => {
     };
 
     try {
-      const response = await axios.post("https://backend-pizza-production.up.railway.app/compras/", payload); 
-      console.log(response.data); 
+      const response = await axios.post("https://backend-pizza-production.up.railway.app/compras/", payload);
+      console.log(response.data);
       navigate("/confirmationShop");
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <>
       <div className="contenedor__todo">
-      <div className="boton__salir">
-          <button  onClick={handleGoBack} className="boton__salir__pago" >
-                <img src="https://cdn-icons-png.flaticon.com/512/3502/3502452.png" alt="" className="boton__atras"/>
-              </button>
-              <h2>Carrito de compras</h2>
-          </div>
+        <div className="boton__salir">
+          <button onClick={handleGoBack} className="boton__salir__pago" >
+            <img src="https://cdn-icons-png.flaticon.com/512/3502/3502452.png" alt="" className="boton__atras" />
+          </button>
+          <h2>Carrito de compras</h2>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)} className="containerformulario">
-          
+
           {foundPizza ? (
-          <div className="card__compra">
-            <img src={foundPizza.image[0].photo} alt="pizza" className="imagen__shop" />
-            <div className="contenedor__shop">
-              <div className="name__shop">{foundPizza.name}</div>
-              <div className="cantidad__shop">x {count}</div>
+            <div className="card__compra">
+              <img src={foundPizza.image[0].photo} alt="pizza" className="imagen__shop" />
+              <div className="contenedor__shop">
+                <div className="name__shop">{foundPizza.name}</div>
+                <div className="cantidad__shop">x {count}</div>
+              </div>
+              <div>
+                <div className="price__shop">$  {foundPizza.precio * count}</div>
+              </div>
             </div>
-            <div>
-              <div className="price__shop">$  {foundPizza.precio * count}</div>
-            </div>
-          </div>
-          ): (
+          ) : (
             <div className="loading">Loading...</div>
-          ) }
+          )}
           <h2 className='title__shop'>Informacion de pago</h2>
           <label>
             Nombre completo
@@ -134,7 +134,9 @@ const ShopDetails = () => {
                 required: true
               })}
             />
-         
+            {errors.nombre && (
+              <span>El campo es obligatorio</span>
+            )}
           </label>
 
           <label>
@@ -148,7 +150,7 @@ const ShopDetails = () => {
                 validate: ValidateTarjeta,
               })}
             />
-           {errors.tarjeta && (
+            {errors.tarjeta && (
               <span>El numero ingresado no pertenece a ninguna tarjeta</span>
             )}
           </label>
@@ -166,7 +168,7 @@ const ShopDetails = () => {
                     validate: ValidateFecha,
                   })}
                 />
-                  {errors.fecha && <span>la fecha ingresada es invalida</span>}
+                {errors.fecha && <span>la fecha ingresada es invalida</span>}
               </label>
             </div>
             <div>
@@ -191,9 +193,9 @@ const ShopDetails = () => {
               className="form-control"
               type="street-address"
               placeholder="Direccion"
-           
+
             />
-            
+
           </label>
 
           <button type="submit" className="boton__form">

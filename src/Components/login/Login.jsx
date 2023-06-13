@@ -24,14 +24,14 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const userLogin = async ({ email, password }) => {
-    const user = await userFind(email, password);
-    if (user.length && !user.error) {  
-      setUsuario(...user);
-      sessionStorage.setItem('user', JSON.stringify(user[0]));
-      console.log(...user);
-      navigate("/home");
-    }
+  const userLogin = () => {
+    // const user = await userFind(email, password);
+    // if (user.length && !user.error) {  
+    //   setUsuario(...user);
+    //   sessionStorage.setItem('user', JSON.stringify(user[0]));
+    //   console.log(...user);
+      navigate("/Home");
+    
   };
 
 
@@ -70,7 +70,7 @@ const Login = () => {
           />
           {errors.password && <span>la contraseña es obligatoria</span>}
         </div>
-        <button type="submit">Iniciar sesión</button>
+        <button onClick={userLogin} type="submit">Iniciar sesión</button>
       </form>
       <div className="linkRegister">
         <span>Restablecer contraseña</span>
