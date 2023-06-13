@@ -1,4 +1,46 @@
-.homeContainer{
-    padding-left: 20px;
-    padding-right: 20px;
+.homeContainer {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .aboutPizzas {
+        
+        font-family: 'Geologica', sans-serif;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding-left: 0;
+        margin-left: 0;
+        width: 100%;
+
+
+        h4 {
+            font-size: 20px;
+            margin: left;
+        }
+
+        .allPizzas{
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            font-weight: 600;
+            color: #F73F64;
+            width: 100px;
+            position: initial;
+            top: 50px;
+        }
+    }
+
+    figure {
+        display: flex;
+        padding: 0px;
+
+        img {
+            width: 170px;
+        }
+    }
+
+    main {
+        width: 395px;
+    }
 }

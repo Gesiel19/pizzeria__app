@@ -2,7 +2,8 @@
 
 .LayoutContainer{
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    align-items: space-evenly;
     font-family: 'Geologica', sans-serif;
     padding: 20px;
 

@@ -17,7 +17,7 @@ const PizzaCard = ({ recipe }) => {
           el: ".pagination",
           clickable: true,
         }}
-        slidesPerView={1}
+        slidesPerView={3}
         breakpoints={{
           "@0.00": {
             slidesPerView: 1,
@@ -27,8 +27,8 @@ const PizzaCard = ({ recipe }) => {
         }}
       >
         {recipe.image?.map((element) => (
-          <SwiperSlide className="carrousel">
-            <img src={element.photo} alt="photo" />
+          <SwiperSlide key={element.id} className="carrousel">
+            <img  className="photoPizza" src={element.photo} alt="photo" />
           </SwiperSlide>
         ))}
       </Swiper>
