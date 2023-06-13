@@ -8,6 +8,9 @@ import SearchsPizzas from "../searchs/SearchsPizzas";
 import CardsDetails from "../cardsDetails/CardsDetails"
 import ShopDetails from "../shopDetails/ShopDetails";
 import ConfirmationShop from "../confirmationShop/ConfirmationShop";
+import SuccessShop from "../shopDetails/SuccessShop"
+
+
 
 const AppRouters = () => {
 
@@ -21,12 +24,16 @@ const AppRouters = () => {
           <Route path="pizzasDetails" element={<CardsDetails />} />
           <Route path="shopDetails" element={<ShopDetails />} />
           <Route path="confirmationShop" element={<ConfirmationShop />} />
+
+            <Route index element={<Login />} />
+
             <Route path={"/"} element={<Layout />}>
               <Route path={"/Home"} index element={<Home />} />
               <Route path="searchPizzas" element={<SearchsPizzas />} />
              
 
             </Route>
+            <Route path={"/SuccessShop"} element={<SuccessShop />} />
           </Routes>
         </ContextProvider>
       </BrowserRouter>

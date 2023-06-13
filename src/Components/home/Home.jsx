@@ -18,9 +18,9 @@ const Home = () => {
   return (
     <>
       <div className='homeContainer'>
-        <section>
+        <section className='aboutPizzas'>
           <h4>Pizzas disponibles</h4>
-          <button>
+          <button className='allPizzas'>
             Ver todas
           </button>
         </section>
