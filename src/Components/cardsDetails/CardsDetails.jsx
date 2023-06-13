@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState }from 'react'
 import "./CardsDetails.scss"
 import { BsChevronLeft } from "react-icons/bs";
 const CardsDetails = () => {
+  const [count, setCount] = useState(1)
+  const handleLess = () => {
+    if (count > 1) {
+      let temp = count;
+      setCount(temp - 1)
+    }
+  }
+
+  const handlePlus = () => {
+    let temp = count;
+    setCount(temp + 1)
+  }
   return (
     <div className="body">
     <div className="main">
@@ -30,9 +42,9 @@ const CardsDetails = () => {
     <div className="buySection">
       <div className="buySection__container container">
         <div className="buySection__counter">
-          <button >-</button>
-          <span>Hola</span>
-          <button >+</button>
+          <button onClick={handleLess}>-</button>
+          <span>{count}</span>
+          <button onClick={handlePlus}>+</button>
         </div>
         <button className="buySection__cartButton">
           <img

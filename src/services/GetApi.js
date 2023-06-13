@@ -1,9 +1,16 @@
-import { URL_API } from "./ApiConfig"
 import axios from 'axios'
 
+ const URL_API = 'https://backend-pizza-production.up.railway.app/pizzas'
+
 export const getPizzas = async () => {
-    const { data } = await axios.get(`${URL_API}`)
-    console.log(data)
-    return data
+    try{
+        const { data } = await axios.get(`${URL_API}`)
+        console.log(data)
+        return data
+    } catch (error){
+        console.log(error)
+        return [];
+    }
 
 }
+getPizzas()

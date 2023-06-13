@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react'
 import cuponOne from "../../assest/cupon1.png"
 import cuponTwo from "../../assest/cupon2.png"
 import PizzaCard from './PizzaCard';
+import { getPizzas } from '../../services/GetApi';
 import "./Home.scss"
 
 const Home = () => {
   const [pizzaList, setPizzaList] = useState([]);
 
   useEffect(() => {
-    fetch("https://backend-pizza-production.up.railway.app/pizzas/")
-      .then((response) => response.json())
-      .then((data) => setPizzaList(data));
-      console.log(pizzaList);
+    getPizzas().then((data) => {
+      setPizzaList(data);
+    })
   }, []);
+
 
   return (
     <>
