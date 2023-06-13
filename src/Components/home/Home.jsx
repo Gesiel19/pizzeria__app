@@ -8,6 +8,7 @@ import "./Home.scss"
 const Home = () => {
   const [pizzaList, setPizzaList] = useState([]);
 
+
   useEffect(() => {
     getPizzas().then((data) => {
       setPizzaList(data);

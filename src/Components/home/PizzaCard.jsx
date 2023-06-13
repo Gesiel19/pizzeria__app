@@ -1,13 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
 import 'swiper/swiper-bundle.css';
 import "./Card.scss"
+import { useNavigate } from "react-router-dom";
+import { Context } from '../context/Context';
 
 const PizzaCard = ({ recipe }) => {
+
+  const {
+    handleSelectedPizza } = useContext(Context);
+
+  const navigate = useNavigate();
+
+  const handleNavigateDetails = (pizzaId) => {
+    handleSelectedPizza(pizzaId)
+    sessionStorage.setItem("detailsParams", JSON.stringify(pizzaId));
+    navigate(`/pizzasDetails`);
+
+
+  };
+
   return (
     <div className='cardContainer'>
-      <Swiper className="carrouselSlide"
+      <Swiper onClick={() => {
+        handleNavigateDetails(recipe.id);
+      }}
+        className="carrouselSlide"
         modules={[Pagination, Autoplay]}
         autoplay={{
           delay: 3000,
@@ -38,10 +57,10 @@ const PizzaCard = ({ recipe }) => {
       <h3>{recipe.name}</h3>
       <span className='contentPrice' >{recipe.precio}</span>
 
-      </div>
+    </div>
 
 
   )
 }
 
-      export default PizzaCard
+export default PizzaCard
