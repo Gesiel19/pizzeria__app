@@ -40,6 +40,13 @@ const ShopDetails = () => {
       return true;
     }
   };
+  const validateRequiredField = (value) => {
+    if (!value) {
+      return "Este campo es requerido";
+    } else {
+      return true;
+    }
+  };
   
   return (
     <>
@@ -70,9 +77,12 @@ const ShopDetails = () => {
               className="form-control"
               type="text"
               placeholder="Ingresa tu nombre"
-             
+              {...register("nombre", {
+                required: true,
+                validate: validateRequiredField,
+              })}
             />
-         
+           {errors.cvv && <span>Este campo es obligatorio</span>}
           </label>
 
           <label>
@@ -129,9 +139,13 @@ const ShopDetails = () => {
               className="form-control"
               type="street-address"
               placeholder="Direccion"
+              {...register("direccion", {
+                required: true,
+                validate: validateRequiredField,
+              })}
            
             />
-            
+            {errors.direccion && <span>Este campo es obligatorio</span>}
           </label>
 
           <button type="submit" className="boton__form">
