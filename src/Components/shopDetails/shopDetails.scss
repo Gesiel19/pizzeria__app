@@ -46,7 +46,7 @@
     flex-direction: column;  
     margin-top: 20px;
     width: 50%;
-    gap: 16px;
+    gap: 10px;
     margin-left: -99px;
 }
 .boton__salir{
@@ -95,12 +95,15 @@
 .form-control{
     width: 301px;
     margin-left: 1px;
+    color: black;
 }
 .form-control-fecha{
    margin-left: 1px;
    width: 154px;
+   color: black;
 }
 .form-control-cvv{
     margin-left: 1px;
     width: 123px;
+    color: black;
  }
