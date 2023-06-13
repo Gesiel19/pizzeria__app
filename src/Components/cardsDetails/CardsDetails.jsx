@@ -1,8 +1,15 @@
 import React, { useState }from 'react'
 import "./CardsDetails.scss"
 import { BsChevronLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+
 const CardsDetails = () => {
   const [count, setCount] = useState(1)
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1)
+  }
   const handleLess = () => {
     if (count > 1) {
       let temp = count;
@@ -18,7 +25,7 @@ const CardsDetails = () => {
     <div className="body">
     <div className="main">
       <section className="main__header">
-        <div className="main__goBack">
+        <div onClick={handleGoBack} className="main__goBack">
           <span><BsChevronLeft className='icon' /></span>Todas las pizzas
         </div>
       </section>

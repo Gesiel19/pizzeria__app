@@ -10,6 +10,9 @@ const ShopDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const handleGoBack = () => {
+    navigate(-1)
+  }
 
   const onSubmit =  () => {
     navigate("/confirmationShop");
@@ -42,7 +45,7 @@ const ShopDetails = () => {
     <>
       <div className="contenedor__todo">
       <div className="boton__salir">
-          <button className="boton__salir__pago" >
+          <button  onClick={handleGoBack} className="boton__salir__pago" >
                 <img src="https://cdn-icons-png.flaticon.com/512/3502/3502452.png" alt="" className="boton__atras"/>
               </button>
               <h2>Carrito de compras</h2>
