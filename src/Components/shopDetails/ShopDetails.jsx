@@ -1,22 +1,57 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./shopDetails.scss";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { getPizzas } from '../../services/GetApi';
+import { Context } from '../context/Context';
+import axios from "axios";
 
 const ShopDetails = () => {
+
+  const { count } = useContext(Context);
+
+  const [pizzaList, setPizzaList] = useState([]);
+  const [choosedPizza, setChoosedPizza] = useState();
+  const [foundPizza, setFoundPizza] = useState();
+
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues
   } = useForm();
   const handleGoBack = () => {
     navigate(-1)
   }
 
-  const onSubmit =  () => {
-    navigate("/confirmationShop");
+  const getFromStorage = () => {
+
+    const pizzaId = sessionStorage.getItem("detailsParams") ? JSON.parse(sessionStorage.getItem("detailsParams")) : {};
+    setChoosedPizza(pizzaId);
   }
+
+  useEffect(() => {
+    getPizzas().then((data) => {
+      setPizzaList(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getFromStorage();
+  }, []);
+
+  useEffect(() => {
+    if (choosedPizza && pizzaList.length > 0) {
+      const Pizza = pizzaList.find(item => item.id == choosedPizza);
+      setFoundPizza(Pizza);
+      console.log(foundPizza);
+    }
+  }, [choosedPizza, pizzaList]);
+
+  // const onSubmit =  () => {
+  //   navigate("/confirmationShop");
+  // }
   const ValidateTarjeta = (value) => {
     if (value.length < 8) {
       return "El numero debería contener al menos 8 caracteres";
@@ -40,6 +75,28 @@ const ShopDetails = () => {
       return true;
     }
   };
+
+    const onSubmit = async () => {
+    const values = getValues(); 
+    const payload = {
+      pizza: foundPizza.name,
+      cantidad: count,
+      precio: count * foundPizza.precio,
+      nombre: values.nombre,
+      tarjeta: values.tarjeta,
+      fecha: values.fecha,
+      cvv: values.cvv,
+      direccion: values.direccion,
+    };
+
+    try {
+      const response = await axios.post("https://backend-pizza-production.up.railway.app/compras/", payload); 
+      console.log(response.data); 
+      navigate("/confirmationShop");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   return (
     <>
@@ -52,17 +109,20 @@ const ShopDetails = () => {
           </div>
         <form onSubmit={handleSubmit(onSubmit)} className="containerformulario">
           
-          
+          {foundPizza ? (
           <div className="card__compra">
-            <img  alt="" className="imagen__shop" />
+            <img src={foundPizza.image[0].photo} alt="pizza" className="imagen__shop" />
             <div className="contenedor__shop">
-              <div className="name__shop"></div>
-              <div className="cantidad__shop">x</div>
+              <div className="name__shop">{foundPizza.name}</div>
+              <div className="cantidad__shop">x {count}</div>
             </div>
             <div>
-              <div className="price__shop">$</div>
+              <div className="price__shop">$  {foundPizza.precio * count}</div>
             </div>
           </div>
+          ): (
+            <div className="loading">Loading...</div>
+          ) }
           <h2 className='title__shop'>Informacion de pago</h2>
           <label>
             Nombre completo
@@ -70,7 +130,9 @@ const ShopDetails = () => {
               className="form-control"
               type="text"
               placeholder="Ingresa tu nombre"
-             
+              {...register("nombre", {
+                required: true
+              })}
             />
          
           </label>

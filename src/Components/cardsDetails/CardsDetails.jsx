@@ -12,7 +12,7 @@ const CardsDetails = () => {
 
   const [pizzaList, setPizzaList] = useState([]);
 
-  const { selectedPizza } = useContext(Context);
+  const { count, handleLess, handlePlus, } = useContext(Context);
   const [choosedPizza, setChoosedPizza] = useState();
   const [foundPizza, setFoundPizza] = useState();
 
@@ -32,7 +32,7 @@ const CardsDetails = () => {
   useEffect(() => {
     getFromStorage();
   }, []);
-  
+
   useEffect(() => {
     if (choosedPizza && pizzaList.length > 0) {
       const Pizza = pizzaList.find(item => item.id == choosedPizza);
@@ -41,34 +41,28 @@ const CardsDetails = () => {
     }
   }, [choosedPizza, pizzaList]);
 
-
-
-  const [count, setCount] = useState(1)
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     navigate(-1)
   }
-  const handleLess = () => {
-    if (count > 1) {
-      let temp = count;
-      setCount(temp - 1)
-    }
-  }
 
-  const handlePlus = () => {
-    let temp = count;
-    setCount(temp + 1)
-  }
+  const handleNavigateShop = () => {
+    navigate(`/shopDetails`);
+
+  };
+
   return (
     <div className="body">
-      <div className="main">
-        <section className="main__header">
-          <div onClick={handleGoBack} className="main__goBack">
-            <span><BsChevronLeft className='icon' /></span>Todas las pizzas
 
-          </div>
-          <Swiper
+      <div className="main">
+        {foundPizza ? (
+          <section className="main__header">
+            <div onClick={handleGoBack} className="main__goBack">
+              <span><BsChevronLeft className='icon' /></span>Todas las pizzas
+
+            </div>
+            <Swiper
               className="SlideDetails"
               modules={[Pagination, Autoplay]}
               autoplay={{
@@ -96,23 +90,31 @@ const CardsDetails = () => {
             </Swiper>
 
             <div className="pagination" />
-        </section>
-        <div className="main__contentContainer">
-          <section className="main__info container">
-            <h1>{foundPizza.name}</h1>
-            <div className="main__chips">
-              <button className="main__chips1"> {foundPizza.precio} </button>
-              <button className="main__chips2">⭐  {foundPizza.reviews}</button>
-            </div>
-            <h3>Descripción</h3>
-            <p>
-              {foundPizza.descripcion}
-            </p>
           </section>
-          <section className="main__reviews container">
-            <h4>{foundPizza.opinions}</h4>
-          </section>
-        </div>
+        ) : (
+          <div className="loading">Loading...</div>
+        )}
+
+        {foundPizza ? (
+          <div className="main__contentContainer">
+            <section className="main__info container">
+              <h1>{foundPizza.name}</h1>
+              <div className="main__chips">
+                <button className="main__chips1"> {foundPizza.precio} </button>
+                <button className="main__chips2">⭐  {foundPizza.reviews}</button>
+              </div>
+              <h3>Descripción</h3>
+              <p>
+                {foundPizza.descripcion}
+              </p>
+            </section>
+            <section className="main__reviews container">
+              <h4>{foundPizza.opinions}</h4>
+            </section>
+          </div>
+        ) : (
+          <div className="loading">Loading...</div>
+        )}
       </div>
       <div className="buySection">
         <div className="buySection__container container">
@@ -127,10 +129,13 @@ const CardsDetails = () => {
               alt="cart icon"
             />
           </button>
-          <button className="buySection__buyButton">Pagar</button>
+          <button onClick={
+        handleNavigateShop} className="buySection__buyButton">Pagar</button>
         </div>
       </div>
     </div>
+
+
   )
 }
 
