@@ -1,11 +1,15 @@
-import React, {  useEffect } from "react";
+import React, {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUser, redirectUser } from "../services/User";
 import "./Register.scss"
+import axios from "axios";
 
 
 const Register = () => {
+
+  const [nameuser, setNameUser] = useState();
+  const [password, setPassword] = useState();
 
   const navigate = useNavigate();
 
@@ -14,21 +18,33 @@ const Register = () => {
 
     redirectUser(navigate);
   }, []);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const userCreate = async (user) => {
   
-    const response = await createUser(user);
-    if (response?.id) {
-     
-      navigate("/");
-    }
-  };
+  
+    
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      getValues
+    } = useForm();
+
+
+    const onSubmit = async () => {
+      const values = getValues();
+      const payload = {
+        user: nameuser,
+        password: password
+      };
+  
+      try {
+        const response = await axios.post("https://backend-pizza-production.up.railway.app/usuarios/", payload);
+        console.log(response.data);
+        navigate("/");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
 
 
 
@@ -41,13 +57,15 @@ const Register = () => {
         alt="Pizza"
       />
       <div className="formRegister"></div>
-      <form onSubmit={handleSubmit(userCreate)} className="form">
+      <form onSubmit={handleSubmit(onSubmit)} className="form">
         <div className="input">
           <input
             type="text"
             {...register("name", { required: true })}
             className={errors.name ? "input--error" : ""}
             placeholder="Nombre"
+            value={nameuser}
+            onChange={(e) => setNameUser(e.target.value)}
           />
         </div>
 
@@ -65,6 +83,8 @@ const Register = () => {
             {...register("password", { required: true })}
             className={errors.password ? "input--error" : ""}
             placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 

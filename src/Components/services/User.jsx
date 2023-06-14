@@ -6,10 +6,9 @@ const URL_PIZZAS = "https://backend-pizza-production.up.railway.app/pizzas";
 
 
 
-export const userFind = async (email, pass) => {
-  const url = `${URL_USERS}?email=${email}&password=${pass}`;
+export const userFind = async () => {
   try {
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(URL_USERS);
     return data;
   } catch (error) {
     return {

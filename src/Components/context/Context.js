@@ -6,6 +6,11 @@ const data = {};
 const ContextProvider = ({children}) => {
   const [selectedPizza, setSelectedPizza] = useState()
   const [count, setCount] = useState(1)
+  const [username, setUsername] = useState("");
+
+  const handleUsername = (value) => {
+    setUsername(value);
+  }
 
   const handleSelectedPizza = (value) => {
     setSelectedPizza(value)
@@ -24,6 +29,8 @@ const ContextProvider = ({children}) => {
   const data ={
     selectedPizza,
     count,
+    username,
+    handleUsername,
     handleLess,
     handlePlus,
     handleSelectedPizza
