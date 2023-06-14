@@ -6,6 +6,7 @@ import { getPizzas } from '../../services/GetApi';
 import { Context } from '../context/Context';
 import axios from "axios";
 
+
 const ShopDetails = () => {
 
   const { count } = useContext(Context);
@@ -97,7 +98,7 @@ const ShopDetails = () => {
       console.error(error);
     }
   };
-
+ 
   return (
     <>
       <div className="contenedor__todo">
@@ -135,7 +136,7 @@ const ShopDetails = () => {
               })}
             />
             {errors.nombre && (
-              <span>El campo es obligatorio</span>
+              <span className="error-message">El campo es obligatorio</span>
             )}
           </label>
 
@@ -151,7 +152,7 @@ const ShopDetails = () => {
               })}
             />
             {errors.tarjeta && (
-              <span>El numero ingresado no pertenece a ninguna tarjeta</span>
+              <span className="error-message">El numero ingresado no pertenece a ninguna tarjeta</span>
             )}
           </label>
 
@@ -168,9 +169,10 @@ const ShopDetails = () => {
                     validate: ValidateFecha,
                   })}
                 />
-                {errors.fecha && <span>la fecha ingresada es invalida</span>}
+                {errors.fecha && <span className="error-message">la fecha ingresada es invalida</span>}
               </label>
             </div>
+           
             <div>
               <label>
                 CVV
@@ -183,7 +185,7 @@ const ShopDetails = () => {
                     validate: ValidateCvv,
                   })}
                 />
-                {errors.cvv && <span>El codigo ingresado es incorrecto</span>}
+                {errors.cvv && <span className="error-message">El codigo ingresado debe tener solo 3 digitos</span>}
               </label>
             </div>
           </div>

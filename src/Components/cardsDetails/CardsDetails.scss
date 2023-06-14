@@ -119,6 +119,24 @@
             color: lightgrey;
         }
     }
+    &__opinions{
+        display: grid;
+        display: grid;
+        margin-left: 45px;
+        margin-top: 15px;
+    }
+    &__avatarContainer{
+        margin-top: 9px;
+    }
+    &__calificacion{
+        margin-top: 27px;
+    margin-left: -84px;
+   
+    }
+    &__nombre{
+        margin-top: 9px;
+    margin-left: 10px;
+    }
 }
 .buySection{
     height: 12vh;

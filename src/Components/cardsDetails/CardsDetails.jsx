@@ -1,27 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react'
-import "./CardsDetails.scss"
+import React, { useContext, useEffect, useState } from "react";
+import "./CardsDetails.scss";
 import { BsChevronLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { getPizzas } from '../../services/GetApi';
-import { Context } from '../context/Context';
+import { getPizzas } from "../../services/GetApi";
+import { Context } from "../context/Context";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
-import 'swiper/swiper-bundle.css';
+import "swiper/swiper-bundle.css";
+import { Avatar } from "@mui/material";
+
 
 const CardsDetails = () => {
-
   const [pizzaList, setPizzaList] = useState([]);
 
-  const { count, handleLess, handlePlus, } = useContext(Context);
+  const { count, handleLess, handlePlus } = useContext(Context);
   const [choosedPizza, setChoosedPizza] = useState();
   const [foundPizza, setFoundPizza] = useState();
 
-
   const getFromStorage = () => {
-
-    const pizzaId = sessionStorage.getItem("detailsParams") ? JSON.parse(sessionStorage.getItem("detailsParams")) : {};
+    const pizzaId = sessionStorage.getItem("detailsParams")
+      ? JSON.parse(sessionStorage.getItem("detailsParams"))
+      : {};
     setChoosedPizza(pizzaId);
-  }
+  };
 
   useEffect(() => {
     getPizzas().then((data) => {
@@ -35,7 +36,7 @@ const CardsDetails = () => {
 
   useEffect(() => {
     if (choosedPizza && pizzaList.length > 0) {
-      const Pizza = pizzaList.find(item => item.id == choosedPizza);
+      const Pizza = pizzaList.find((item) => item.id == choosedPizza);
       setFoundPizza(Pizza);
       console.log(foundPizza);
     }
@@ -44,30 +45,30 @@ const CardsDetails = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   const handleNavigateShop = () => {
     navigate(`/shopDetails`);
-
   };
-
+  const [value, setValue] = React.useState(2);
   return (
     <div className="body">
-
       <div className="main">
         {foundPizza ? (
           <section className="main__header">
             <div onClick={handleGoBack} className="main__goBack">
-              <span><BsChevronLeft className='icon' /></span>Todas las pizzas
-
+              <span>
+                <BsChevronLeft className="icon" />
+              </span>
+              Todas las pizzas
             </div>
             <Swiper
               className="SlideDetails"
               modules={[Pagination, Autoplay]}
               autoplay={{
                 delay: 3000,
-                disableOnInteraction: false
+                disableOnInteraction: false,
               }}
               pagination={{
                 el: ".pagination",
@@ -79,7 +80,6 @@ const CardsDetails = () => {
                   slidesPerView: 1,
                   spaceBetween: 28,
                 },
-
               }}
             >
               {foundPizza.image?.map((element) => (
@@ -101,15 +101,26 @@ const CardsDetails = () => {
               <h1>{foundPizza.name}</h1>
               <div className="main__chips">
                 <button className="main__chips1"> {foundPizza.precio} </button>
-                <button className="main__chips2">⭐  {foundPizza.reviews}</button>
+                <button className="main__chips2">
+                  ⭐ {foundPizza.reviews}
+                </button>
               </div>
               <h3>Descripción</h3>
-              <p>
-                {foundPizza.descripcion}
-              </p>
+              <p>{foundPizza.descripcion}</p>
             </section>
             <section className="main__reviews container">
-              <h4>{foundPizza.opinions}</h4>
+              <div className="main__avatarContainer">
+                <Avatar
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </div>
+              <span className="main__name">Marcos toledo</span>
+              <span className="main__calificacion">⭐⭐⭐</span>
+              <h4 className="main__opinions">{foundPizza.opinions}</h4>
             </section>
           </div>
         ) : (
@@ -129,14 +140,16 @@ const CardsDetails = () => {
               alt="cart icon"
             />
           </button>
-          <button onClick={
-        handleNavigateShop} className="buySection__buyButton">Pagar</button>
+          <button
+            onClick={handleNavigateShop}
+            className="buySection__buyButton"
+          >
+            Pagar
+          </button>
         </div>
       </div>
     </div>
+  );
+};
 
-
-  )
-}
-
-export default CardsDetails
+export default CardsDetails;
